@@ -1,0 +1,88 @@
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes hide {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes slide-out-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.sheet-button {
+  background: none;
+  position: fixed;
+  top: 48px;
+  right: 48px;
+  border: 1px solid black;
+  border-radius: 50%;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.sheet-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(12px);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .sheet-overlay {
+    will-change: opacity;
+  }
+
+  .sheet-overlay[data-state="open"] {
+    animation: show 1000ms ease-out both;
+  }
+  .sheet-overlay[data-state="closed"] {
+    animation: hide 250ms ease-in both;
+  }
+}
+
+.sheet-content {
+  position: fixed;
+  top: 0;
+  right: 148px;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  padding: 48px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .sheet-content {
+    will-change: transform;
+  }
+  .sheet-content[data-state="open"] {
+    animation: slide-in-left 400ms ease-out both;
+    animation-delay: 250ms;
+  }
+  .sheet-content[data-state="closed"] {
+    animation: slide-out-left 250ms ease-in both;
+  }
+}
